@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
 
 env:
-  TF_CLOUD_ORGANIZATION: "rxve"
+  TF_CLOUD_ORGANIZATION: "arxv-tool"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
-  TF_WORKSPACE: "rxve"
+  TF_WORKSPACE: "arxv-tool"
   AWS_REGION: "us-east-1"
 
 jobs:

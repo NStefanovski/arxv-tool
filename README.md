@@ -1,4 +1,4 @@
-# RXVE API Service
+# arxv-tool API Service
 
 This repository contains the codebase for an AWS Lambda function that retrieves abstracts from arXiv given a list of URLs. The infrastructure is managed using Terraform, and deployment is automated with GitHub Actions.
 
@@ -33,10 +33,10 @@ The application consists of:
 
 - **AWS Account** with appropriate permissions.
 - **GitHub Repository** with the following secrets configured:
-  - [`AWS_ACCESS_KEY_ID`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Frxve%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A22%2C%22character%22%3A41%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
-  - [`AWS_SECRET_ACCESS_KEY`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Frxve%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A23%2C%22character%22%3A45%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
-  - [`AWS_REGION`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Frxve%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A9%2C%22character%22%3A2%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition") (e.g., `us-east-1`)
-  - [`TF_API_TOKEN`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Frxve%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A7%2C%22character%22%3A2%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition") (if using Terraform Cloud)
+  - [`AWS_ACCESS_KEY_ID`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A22%2C%22character%22%3A41%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
+  - [`AWS_SECRET_ACCESS_KEY`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A23%2C%22character%22%3A45%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
+  - [`AWS_REGION`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A9%2C%22character%22%3A2%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition") (e.g., `us-east-1`)
+  - [`TF_API_TOKEN`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A7%2C%22character%22%3A2%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition") (if using Terraform Cloud)
 - **Terraform** installed locally (if deploying manually).
 - **Python 3.9** installed locally (for Lambda function development).
 
@@ -45,13 +45,13 @@ The application consists of:
 1. **Clone the Repository**:
 
    ```sh
-   git clone https://github.com/NStefanovski/rxve.git
+   git clone https://github.com/NStefanovski/arxv-tool.git
    ```
 
 2. **Navigate to the Project Directory**:
 
    ```sh
-   cd rxve
+   cd arxv-tool
    ```
 
 3. **Configure AWS Credentials**:
@@ -102,7 +102,7 @@ Manual deployment:
 3. **Update Lambda Function Code**:
 
    ```sh
-   aws lambda update-function-code --function-name rxve-api-function --zip-file fileb://../../terraform/index.zip
+   aws lambda update-function-code --function-name arxv-tool-api-function --zip-file fileb://../../terraform/index.zip
    ```
 
 Using GitHub Actions:
