@@ -1,0 +1,51 @@
+name: Lambda Deployment
+
+on:
+  workflow_dispatch:
+
+env:
+  AWS_REGION: "us-east-1"
+  LAMBDA_FUNCTION_NAME: "rxve-api-function"  # Ensure this matches your Lambda function name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Upgrade pip and Install Dependencies
+        working-directory: ./src/lambda
+        run: |
+          python -m pip install --upgrade pip
+          pip install --target . -r requirements.txt
+        shell: bash
+      
+      - name: Log Installed Packages
+        working-directory: ./src/lambda
+        run: |
+          pip list
+        shell: bash
+
+      - name: Create Lambda ZIP Package
+        working-directory: ./src/lambda
+        run: |
+          zip -r ../../terraform/index.zip .  # Zips all contents including dependencies
+        shell: bash
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy Lambda Function
+        run: |
+          aws lambda update-function-code --function-name ${{ env.LAMBDA_FUNCTION_NAME }} --zip-file fileb://terraform/index.zip
