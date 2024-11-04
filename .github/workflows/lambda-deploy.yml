@@ -48,4 +48,6 @@ jobs:
       - name: Deploy Lambda Function
         run: |
           aws lambda update-function-code --function-name ${{ env.LAMBDA_FUNCTION_NAME }} --zip-file fileb://terraform/index.zip
-          aws lambda update-function-configuration --function-name ${{ env.LAMBDA_FUNCTION_NAME }} --environment "Variables={OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}}"
+          for i in {1..5}; do
+            aws lambda update-function-configuration --function-name ${{ env.LAMBDA_FUNCTION_NAME }} --environment "Variables={OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}}" && break || sleep 10;
+          done
