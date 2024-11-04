@@ -33,11 +33,11 @@ The application consists of:
 
 - **AWS Account** with appropriate permissions.
 - **GitHub Repository** with the following secrets configured:
-  - [`AWS_ACCESS_KEY_ID`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A22%2C%22character%22%3A41%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
-  - [`AWS_SECRET_ACCESS_KEY`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A23%2C%22character%22%3A45%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition")
-  - [`AWS_REGION`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%7B%22scheme%22%3A%22file%22%2C%22authority%22%3A%22%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22query%22%3A%22%22%2C%22fragment%22%3A%22%22%7D%2C%22pos%22%3A%7B%22line%22%3A9%2C%22character%22%3A2%7D%7D%5D%2C%229337f1ae-4469-4980-96a2-9d8a92cd26ee%22%5D "Go to definition") (e.g., `us-east-1`)
-  - [`TF_API_TOKEN`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%22file%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22pos%22%3A%7B%22line%22%3A7%2C%22character%22%3A2%7D%7D%5D%2C%22%22%5D "Go to file") (if using Terraform Cloud)
-  - [`OPENAI_API_KEY`](command:_github.copilot.openSymbolFromReferences?%5B%22%22%2C%5B%7B%22uri%22%3A%22file%22%2C%22path%22%3A%22%2Fc%3A%2FSource%20Code%2FProjects%2Farxv-tool%2F.github%2Fworkflows%2Fterraform-destroy.yml%22%2C%22pos%22%3A%7B%22line%22%3A7%2C%22character%22%3A2%7D%7D%5D%2C%22%22%5D "Go to file") (for OpenAI API access)
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION` (e.g., `us-east-1`)
+  - `TF_API_TOKEN` (if using Terraform Cloud)
+  - `OPENAI_API_KEY` (for OpenAI API access)
 - **Terraform** installed locally (if deploying manually).
 - **Python 3.9** installed locally (for Lambda function development).
 
@@ -104,7 +104,7 @@ To test the API:
 
 ## Cleanup
 
-### TODO: Build Out Destroy Infrastructure with Terraform
+### TODO: Configure - Destroy Infrastructure with Terraform
 
 Using GitHub Actions:
 
