@@ -2,6 +2,8 @@ import json
 import re
 import requests
 import xml.etree.ElementTree as ET
+import openai
+import os
 
 def is_valid_arxiv_url(url):
     pattern = r'^https://arxiv\.org/abs/([\w\.]+)(v\d+)?$'
@@ -21,26 +23,54 @@ def fetch_abstract(arxiv_id):
             return abstract_elem.text.strip()
     return None
 
+# Function to call OpenAI API
+def analyze_abstracts(abstract1, abstract2):
+    openai.api_key = os.getenv('OPENAI_API_KEY')  # Read the API key from environment variables
+    client = openai.OpenAI()
+    prompt = (
+        "You are a concise researcher trying to unlock new science. "
+        "Read the two abstracts below and state how they could be interconnected in terms of the field of study:\n\n"
+        f"Abstract 1: {abstract1}\n\n"
+        f"Abstract 2: {abstract2}\n\n"
+        "Concise statement on interconnection:"
+    )
+    completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ]
+    )
+    return completion.choices[0].message['content'].strip()
+
 def handler(event, context):
     body = json.loads(event['body'])
     urls = body.get('urls', [])
-    
-    results = []
-    for url in urls:
-        valid, arxiv_id = is_valid_arxiv_url(url)
-        if valid:
-            abstract = fetch_abstract(arxiv_id)
-            if abstract:
-                results.append({'url': url, 'abstract': abstract})
-            else:
-                results.append({'url': url, 'abstract': 'Failed to fetch abstract'})
-        else:
-            results.append({'url': url, 'abstract': 'Invalid URL'})
-    
+    if len(urls) != 2:
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Please provide exactly two arXiv URLs.'})
+        }
+
+    valid_urls = [is_valid_arxiv_url(url) for url in urls]
+    if not all(valid for valid, _ in valid_urls):
+        return {
+            'statusCode': 400,
+            'body': json.dumps({'error': 'Invalid arXiv URLs provided.'})
+        }
+
+    arxiv_ids = [arxiv_id for _, arxiv_id in valid_urls]
+    abstracts = [fetch_abstract(arxiv_id) for arxiv_id in arxiv_ids]
+
+    if None in abstracts:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': 'Failed to fetch one or both abstracts.'})
+        }
+
+    analysis = analyze_abstracts(abstracts[0], abstracts[1])
+
     return {
         'statusCode': 200,
-        'body': json.dumps(results),
-        'headers': {
-            'Content-Type': 'application/json'
-        }
+        'body': json.dumps({'analysis': analysis})
     }
