@@ -10,12 +10,6 @@ variable "project_name" {
   default     = "arxv-tool-api"
 }
 
-variable "aws_region" {
-  description = "AWS region for all resources"
-  type        = string
-  default     = "us-east-1"
-}
-
 variable "aws_access_key" {
   description = "AWS Access Key"
   type        = string
