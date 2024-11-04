@@ -1,6 +1,6 @@
-# arxv-tool API Service
+# arxv-tool arXiv API Service
 
-This repository contains the codebase for an AWS Lambda function that retrieves abstracts from arXiv given a list of URLs and uses OpenAI's API to analyze how the abstracts are interconnected. The infrastructure is managed using Terraform, and deployment is automated with GitHub Actions.
+This repository contains the codebase for an AWS Lambda function that retrieves abstracts from **arXiv** given a list of URLs and uses OpenAI's API to analyze how the abstracts are interconnected. The infrastructure is managed using Terraform, and deployment is automated with GitHub Actions.
 
 ## Table of Contents
 
