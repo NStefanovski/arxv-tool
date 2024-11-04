@@ -41,7 +41,7 @@ def analyze_abstracts(abstract1, abstract2):
             {"role": "user", "content": prompt}
         ]
     )
-    return completion.choices[0].message['content'].strip()
+    return completion.choices[0].message.content.strip()
 
 def handler(event, context):
     body = json.loads(event['body'])
