@@ -104,7 +104,7 @@ To test the API:
 
 ## Cleanup
 
-### Destroy Infrastructure with Terraform
+### TODO: Build Out Destroy Infrastructure with Terraform
 
 Using GitHub Actions:
 
